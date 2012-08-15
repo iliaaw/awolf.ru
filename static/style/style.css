@@ -1,0 +1,278 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    font-family: Georgia, serif;
+    background: url(/static/images/bg.png);
+}
+
+a {
+    text-decoration: none;
+    color: #05a;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #58d;
+}
+
+pre {
+    padding: 10px 30px;
+    line-height: 20px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+code {
+    font-family: Consolas, "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+    font-size: 16px;
+    line-height: 16px;
+}
+
+#content-wrapper {
+    width: 720px;
+    min-height: 100%;
+    margin: 0px auto;
+    padding: 0px 30px;
+    overflow: hidden;
+}
+
+#header {
+    padding: 50px 0px;
+    font-size: 32px;
+    font-family: "EB Garamond", Georgia, serif;
+}
+
+#header a {
+    color: #000;
+    text-decoration: none;
+}
+
+#nav {
+    height: 50px;
+    font-size: 18px;
+    text-align: justify;
+}
+
+#nav li {
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+}
+
+#nav li.helper {
+    width: 100%;
+}
+
+#content {
+    font-size: 18px;
+    line-height: 25px;
+    padding: 50px 0px 130px;
+}
+
+#paginator,
+#twitter {
+    padding-top: 50px;
+}
+
+#footer-wrapper {
+    width: 720px;
+    margin: -80px auto 0px;
+    font-size: 16px;
+}
+
+#footer {
+    padding-top: 20px;
+}
+
+#contacts {
+    float: left;
+}
+
+#contacts li {
+    float: left;
+}
+
+#contacts li:after {
+    content: "/";
+}
+
+#contacts li:last-child:after {
+    content: "";
+}
+
+#contacts li a {
+    padding: 0px 5px;
+}
+
+#contacts li:first-child a {
+    padding-left: 0px;
+}
+
+#contacts li:last-child a {
+    padding-right: 0px;
+}
+
+#copyright {
+    color: #444;
+    float: right;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background: #666;
+    box-shadow: #fff 0px 1px;
+}
+
+.post {
+    padding-top: 50px;
+    color: #000;
+}
+
+.post:first-child {
+    padding-top: 0px;
+}
+
+.post p {
+    padding: 12px 0px;
+    /*text-align: justify;*/
+}
+
+.post p:first-child {
+    padding-top: 0px;
+}
+
+.post p:last-child {
+    padding-bottom: 0px;
+}
+
+.post h2 {
+    padding-bottom: 10px;
+    color: #000;
+    font-size: 32px;
+    font-family: "EB Garamond", Georgia, serif;
+}
+
+.post h2 a {
+    color: #000 !important;
+}
+
+.post h2 a:hover {
+    color: #666 !important;
+}
+
+.post h3 {
+    padding: 20px 0px 12px;
+    font-family: Georgia;
+    font-size: 22px;
+}
+
+.post .timestamp {
+    font-style: italic;
+    color: #444;
+    padding-bottom: 12px;
+}
+
+.post img {
+    max-width: 720px;
+    display: block;
+    margin: 0px auto;
+}
+
+.post .highlight {
+    margin: 5px -30px;
+    background: #ddd;
+}
+
+.post ul {
+    /*text-align: justify;*/
+    list-style: disc;
+    padding: 12px 0px;
+    line-height: 25px;
+}
+
+#paginator span#previous-page,
+#paginator span#next-page {
+    color: #444;
+}
+
+#paginator #next-page {
+    padding-left: 0px;
+}
+
+#error {
+    background: url(/static/images/dark-bg.png);
+    padding: 12px 0px;
+}
+
+#error-code {
+    color: #f33;
+    font-size: 72px;
+    line-height: 72px;
+    text-align: center;
+    font-family: "Times New Roman", serif;
+}
+
+#error-message {
+    font-size: 20px;
+    line-height: 18px;
+    text-align: center;
+    color: #eee;
+}
+
+.tags {
+    margin: 12px 0px 0px;
+    background: url(/static/images/tag.png) no-repeat 0px 5px;
+    padding-left: 20px;
+}
+
+.tag {
+    color: #333;
+    text-decoration: none;
+}
+
+.tag:hover {
+    color: #666;
+    text-decoration: underline;
+}
+
+.tag:after {
+    content: ",";
+}
+
+.tag:last-child:after {
+    content: "";
+}
+
+/*
+.tag {
+    float: left;
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    font-size: 16px;
+    font-family: "Droid Sans", Arial, sans-serif;
+    margin: 0px 12px;
+    padding: 0px 6px 0px 3px;
+    background: #9cf;
+    text-decoration: none;
+    color: #666;
+}
+
+.tag:before {
+    content: "";
+    float: left;
+    position: absolute;
+    left: -12px;
+    border-top: 12px solid transparent;
+    border-right: 12px solid #9cf;
+    border-bottom: 12px solid transparent;  
+}
+
+.tag:hover {
+    text-decoration: none;
+    color: #333;
+}*/

@@ -1,0 +1,22 @@
+---
+layout: base
+---
+{% include post-list.html %}
+
+<p id="paginator">
+    {% if paginator.previous_page %}
+        {% if paginator.previous_page == 1 %}
+            <a href="/" id="previous-page">←Влево</a>
+        {% else %}
+            <a href="/page{{ paginator.previous_page }}" id="previous-page">←Влево</a>
+        {% endif %}
+    {% else %}
+        <span id="previous-page">←Влево</span>
+    {% endif %}
+    /
+    {% if paginator.next_page %}
+        <a href="/page{{ paginator.next_page }}" id="next-page">Вправо→</a>
+    {% else %}
+        <span id="next-page">Вправо→</span>
+    {% endif %}
+</p>

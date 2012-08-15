@@ -1,0 +1,22 @@
+---
+layout: base
+---
+<div class="post">
+    <h2>{{ page.title }}</h2>
+
+    <div class="timestamp">
+        Опубликовано {{ page.date | localize:"%d %B %Y" }} (<span class="timeago notice" title="{{ page.date | date_to_xmlschema }}"></span>)
+    </div>
+
+    {{ content | remove:"<cut />" }}
+
+    <div class="tags">
+        {% for tag in page.tags %}
+            <a class="tag" href="/tags/{{ tag }}/">{{ tag }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="twitter">
+    Хотите оставить комментарий? Можете сделать это в <a href="http://twitter.com/ilyahohryakov">Twitter</a>.
+</div>

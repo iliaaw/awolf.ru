@@ -1,0 +1,4 @@
+server_port: 5000
+pygments:    true
+permalink:   /:title/
+paginate:    2

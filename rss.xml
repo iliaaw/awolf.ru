@@ -1,0 +1,26 @@
+---
+layout: nil
+---
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Yet Another Blog</title>
+        <link>http://awolf.ru/</link>
+        <atom:link href="http://awolf.ru/rss.xml" rel="self" type="application/rss+xml" />
+        <description>Yet Another Blog</description>
+        <language>ru-ru</language>
+        <pubDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+        <lastBuildDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</lastBuildDate>
+
+        {% for post in site.posts %}
+            <item>
+                <title>{{ post.title }}</title>
+                <link>http://awolf.ru{{ post.url }}</link>
+                <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+                <author>ilyahohryakov@gmail.com (Ilya Khokhryakov)</author>
+                <guid>http://awolf.ru{{ post.id }}</guid>
+                <description>{{ post.content | remove:"<cut />" | xml_escape }}</description>
+            </item>
+        {% endfor %}
+    </channel> 
+</rss>
