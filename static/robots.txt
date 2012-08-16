@@ -1,4 +1,7 @@
 User-Agent: *
+Disallow: /tag/
+Disallow: /static/
+Disallow: *.html
 Disallow: /rss.xml
 Disallow: /atom.xml
-Disallow: *.html
+Sitemap: http://awolf.ru/sitemap.xml
