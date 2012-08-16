@@ -1,5 +1,5 @@
 User-Agent: *
-Disallow: /tag/
+Disallow: /tags/
 Disallow: /static/
 Disallow: *.html
 Disallow: /rss.xml
