@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow: /rss.xml
+Disallow: /atom.xml
+Disallow: *.html
