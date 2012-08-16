@@ -1,0 +1,94 @@
+---
+layout: post
+title: Деплоймент Flask + uWSGI + nginx
+tags:
+- flask
+- uwsgi
+- nginx
+date: 2012-08-16 13:21:00
+---
+Проверено для Flask 0.8, uWSGI 1.0.3, nginx 1.1.19.
+
+Flask — это маленький веб-фреймворк на Python, который отлично подходит для написания небольших проектов. Для запуска приложений на нем я использую связку uWSGI с nginx. На офсайте Flask есть руководство, посвященное uWSGI, но оно хреновое — зачем руками стартовать приложение, когда можно написать для него конфиг, который будет подхватываться при рестарте.
+
+<cut />
+
+Создаем <code>virtualenv</code> и ставим Flask.
+
+{% highlight bash %}
+$ virtualenv env
+$ source env/bin/activate
+$ pip install flask
+{% endhighlight %}
+
+Ставим  uWSGI, nginx и плагин для Python для uWSGI. Под Debian я ставлю все из testing-репозитория.
+
+{% highlight bash %}
+$ sudo apt-get install uwsgi nginx uwsgi-plugin-python
+{% endhighlight %}
+
+<h3>nginx</h3>
+
+Подробную настройку nginx оставим гуру этого дела, я ограничусь лишь основным. В <code>/etc/nginx/sites-available/</code> создаем новый конфиг, <code>flask.conf</code>, например, в нем пишем
+
+{% highlight nginx %}
+upstream flask_serv {
+    server 127.0.0.1:2501;
+}
+
+server {
+    listen 80;
+    server_name <имя_сайта>;
+    
+    location / {
+        uwsgi_pass flask_serv;
+        include uwsgi_params;
+    }
+
+    location /static/ {
+        root /путь/к/статике/;
+    }
+}
+{% endhighlight %}
+
+В <code>/etc/nginx/sites-enabled/</code> надо кинуть символическую ссылку на этот конфиг
+
+{% highlight bash %}
+$ sudo ln -s /etc/nginx/sites-available/flask.conf 
+/etc/nginx/sites-enabled/flask.conf
+{% endhighlight %}
+
+<h3>uWSGI</h3>
+
+Теперь в <code>/etc/uwsgi/apps-available/</code> создаем конфиг для uWSGI <code>flask.xml</code> следующего содержания
+
+{% highlight xml %}
+<uwsgi>
+    <socket>127.0.0.1:2501</socket>
+    <pythonpath>/путь/к/директории/с/приложением/</pythonpath>
+    <module>flask_uwsgi</module>
+    <plugins>python27</plugins>
+    <virtualenv>/путь/к/virtualenv/</virtualenv>
+</uwsgi>
+{% endhighlight %}
+
+В <code>/etc/uwsgi/apps-enabled/</code> тоже надо создать символическую ссылку на конфиг
+
+{% highlight bash %}
+$ sudo ln -s /etc/uwsgi/apps-available/flask.xml 
+/etc/uwsgi/apps-enabled/flask.xml
+{% endhighlight %}
+
+В директории с приложением, соответственно, должен быть примерно такой <code>flask_uwsgi.py</code>:
+
+{% highlight python %}
+from app import app as application
+{% endhighlight %}
+
+И там же должен быть <code>app.py</code> с такой строкой
+
+{% highlight python %}
+app = Flask(__name__)
+{% endhighlight %}
+
+На этом все, рестартуем nginx и uWSGI и радуемся жизни.
