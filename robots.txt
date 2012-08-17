@@ -5,3 +5,4 @@ Disallow: *.html
 Disallow: /rss.xml
 Disallow: /atom.xml
 Sitemap: http://awolf.ru/sitemap.xml
+Host: awolf.ru
