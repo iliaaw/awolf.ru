@@ -8,7 +8,7 @@ layout: base
         Опубликовано {{ page.date | localize:"%d %B %Y" }} (<span class="timeago notice" title="{{ page.date | date_to_xmlschema }}"></span>)
     </div>
 
-    {{ content | remove:"<cut />" }}
+    {{ content | replace:"<cut />","<a name='cut'></a>" }}
 
     <div class="tags">
         {% for tag in page.tags %}

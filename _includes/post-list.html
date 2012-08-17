@@ -9,7 +9,7 @@
         {{ post.content | cut }}
 
         {% if post.content contains "<cut />" %}
-            <p class="read-more"><a href="{{ post.url }}">Читать дальше→</a></p>
+            <p class="read-more"><a href="{{ post.url }}#cut">Читать дальше→</a></p>
         {% endif %}
 
         <div class="tags">
