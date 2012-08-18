@@ -1,0 +1,47 @@
+---
+layout: post
+title: Меняем местами ветки в git
+date: 2012-08-18 16:57:00
+tags:
+- git
+---
+Недавно понадобилось поменять местами <code>master</code>-ветку git с другой, <code>devel</code>, в которой я вел разработку последнее время. При этом ветка <code>devel</code> не была основана на <code>master</code>, поэтому я хотел обойтись без слияния и старую <code>master</code> превратить в <code>legacy</code>, а <code>devel</code> превратить в <code>master</code>.
+
+Собственно, решение.
+
+1. Переименовываем ветки в локальном репозитории
+
+{% highlight bash %}
+$ git branch -m master legacy
+$ git branch -m devel master
+{% endhighlight %}
+
+2. В админке репозитория (на Github, Bitbucket, etc) устанавливаем <code>devel</code> веткой по умолчанию (иначе сервер не даст выполнить следующий шаг)
+
+3. Удаляем ветку <code>master</code> на сервере
+
+{% highlight bash %}
+$ git push origin :master
+{% endhighlight %}
+
+4. Пушим новую ветку <code>master</code> (которая на самом деле старая <code>devel</code>) на сервер
+
+{% highlight bash %}
+$ git push origin master:master
+{% endhighlight %}
+
+5. Пушим новую ветку <code>legacy</code> (которая на самом деле старая <code>master</code>) на сервер
+
+{% highlight bash %}
+$ git push origin legacy:legacy
+{% endhighlight %}
+
+6. В админке устанавливаем <code>master</code> веткой по умолчанию
+
+7. Удаляем ветку <code>devel</code> на сервере
+
+{% highlight bash %}
+$ git push origin :devel
+{% endhighlight %}
+
+Если с репозиторием работает кто-то еще, лучше либо вообще так не делать, либо предупредить. Иначе при попытке сделать <code>pull</code> или <code>push</code> в других локальных репозиториях будет ололо.
