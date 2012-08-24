@@ -1,0 +1,53 @@
+---
+layout: post
+title: Настройка прав доступа на вебсервере
+tags: 
+- linux
+- nginx
+---
+Решил сформулировать наилучший способ настройки прав на веб-сервере под линуксом.
+
+Условия такие:
+
+<ul>
+<li>Есть директория <code>/var/www/</code> с проектами. Для определенности, возьмем <code>/var/www/project/</code>.</li>
+<li>Есть пользователь (например, <code>user</code>), под которым я правлю что-то нибудь в <code>/var/www/project/</code>.</li>
+<li>Есть nginx, uwsgi, gunicorn, etc которые работают под <code>www-data</code> или под другим пользователем из группы <code>www-data</code>. Иногда им приходится аплоадить файлы куда-нибудь в <code>/var/www/project/uploads/</code>.</li>
+<li>Требуется чтобы все работало без решений в стиле <code>chmod 777</code> и необходимости лишний раз использовать sudo.</li>
+</ul>
+
+<cut />
+
+<h3>Решение</h3>
+
+Делаем пользователя, под которым работаем сами, владельцем <code>/var/www/project/</code>
+
+{% highlight bash %}
+$ sudo chown -R user /var/www/project/
+{% endhighlight %}
+
+Делаем группу <code>www-data</code> группой <code>/var/www/project/</code>
+
+{% highlight bash %}
+$ sudo chgrp -R www-data /var/www/project/
+{% endhighlight %}
+
+Владелец должен иметь полные права, группа только на чтение и выполнение, остальным можно не давать никаких прав (а то вдруг там пароли в plain text лежат, хе-хе)
+
+{% highlight bash %}
+$ sudo chmod -R 750 /var/www/project/
+{% endhighlight %}
+
+Директория для загружаемых файлов -- исключение: группа <code>www-data</code> должна иметь права на запись туда
+
+{% highlight bash %}
+$ sudo chmod -R 770 /var/www/project/uploads/
+{% endhighlight %}
+
+Все созданные в будущем файлы будут наследовать группу родительской директории
+
+{% highlight bash %}
+$ sudo chmod g+s /var/www/project/
+{% endhighlight %}
+
+На этом все.
