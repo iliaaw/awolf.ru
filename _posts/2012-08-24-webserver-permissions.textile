@@ -50,5 +50,3 @@ $ sudo chmod -R 770 /var/www/project/uploads/
 {% highlight bash %}
 $ sudo chmod g+s /var/www/project/
 {% endhighlight %}
-
-На этом все.
