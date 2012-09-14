@@ -12,7 +12,7 @@ date: 2012-08-24 20:09:00
 
 <ul>
 <li>Есть директория <code>/var/www/</code> с проектами. Для определенности, возьмем <code>/var/www/project/</code>.</li>
-<li>Есть пользователь (например, <code>user</code>), под которым я правлю что-то нибудь в <code>/var/www/project/</code>.</li>
+<li>Есть пользователь (например, <code>user</code>), под которым я правлю что-нибудь в <code>/var/www/project/</code>.</li>
 <li>Есть nginx, uwsgi, gunicorn, etc которые работают под <code>www-data</code> или под другим пользователем из группы <code>www-data</code>. Иногда им приходится аплоадить файлы куда-нибудь в <code>/var/www/project/uploads/</code>.</li>
 <li>Требуется чтобы все работало без решений в стиле <code>chmod 777</code> и необходимости лишний раз использовать sudo.</li>
 </ul>
