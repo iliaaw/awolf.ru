@@ -6,6 +6,8 @@ body {
     height: 100%;
     font-family: Georgia, serif;
     background: url(/static/images/bg.png);
+    font-size: 18px;
+    color: #202020;
 }
 
 a {
@@ -46,13 +48,12 @@ code {
 }
 
 #header a {
-    color: #000;
+    color: #202020;
     text-decoration: none;
 }
 
 #nav {
     height: 50px;
-    font-size: 18px;
     text-align: justify;
 }
 
@@ -67,7 +68,6 @@ code {
 }
 
 #content {
-    font-size: 18px;
     line-height: 25px;
     padding: 50px 0px 130px;
 }
@@ -116,7 +116,7 @@ code {
 }
 
 #copyright {
-    color: #444;
+    color: #4f4f4f;
     float: right;
 }
 
@@ -129,7 +129,6 @@ code {
 
 .post {
     padding-top: 50px;
-    color: #000;
 }
 
 .post:first-child {
@@ -138,7 +137,6 @@ code {
 
 .post p {
     padding: 12px 0px;
-    /*text-align: justify;*/
 }
 
 .post p:first-child {
@@ -151,13 +149,13 @@ code {
 
 .post h2 {
     padding-bottom: 10px;
-    color: #000;
+    color: #202020;
     font-size: 32px;
     font-family: "EB Garamond", Georgia, serif;
 }
 
 .post h2 a {
-    color: #000 !important;
+    color: #202020 !important;
 }
 
 .post h2 a:hover {
@@ -172,7 +170,7 @@ code {
 
 .post .timestamp {
     font-style: italic;
-    color: #444;
+    color: #4f4f4f;
     padding-bottom: 12px;
 }
 
@@ -188,7 +186,6 @@ code {
 }
 
 .post ul {
-    /*text-align: justify;*/
     list-style: disc;
     padding: 12px 0px;
     line-height: 25px;
@@ -196,7 +193,7 @@ code {
 
 #paginator span#previous-page,
 #paginator span#next-page {
-    color: #444;
+    color: #4f4f4f;
 }
 
 #paginator #next-page {
@@ -246,33 +243,3 @@ code {
 .tag:last-child:after {
     content: "";
 }
-
-/*
-.tag {
-    float: left;
-    height: 24px;
-    line-height: 24px;
-    position: relative;
-    font-size: 16px;
-    font-family: "Droid Sans", Arial, sans-serif;
-    margin: 0px 12px;
-    padding: 0px 6px 0px 3px;
-    background: #9cf;
-    text-decoration: none;
-    color: #666;
-}
-
-.tag:before {
-    content: "";
-    float: left;
-    position: absolute;
-    left: -12px;
-    border-top: 12px solid transparent;
-    border-right: 12px solid #9cf;
-    border-bottom: 12px solid transparent;  
-}
-
-.tag:hover {
-    text-decoration: none;
-    color: #333;
-}*/
