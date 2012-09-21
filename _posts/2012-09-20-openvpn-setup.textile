@@ -1,0 +1,168 @@
+---
+layout: post
+title: Настройка OpenVPN для выхода в интернет
+tags:
+- vpn
+- openvpn
+- linux
+---
+Полезно иметь под рукой VPN, настроенный для выхода через него в интернет. Мне, например, он нужен для того, чтобы спокойно лазить в инет через открытую WiFi-точку в вузе. Да и в связи с грядущим введением в эксплуатацию великого отечественного фаервола тема актуальна. В статье -- подробное руководство по настройке OpenVPN на сервере под Ubuntu и клиентах под Ubuntu или Android.
+
+<cut />
+
+<h3>Настройка сервера</h3>
+
+Устанавливаем OpenVPN из репозитория.
+
+{% highlight bash %}
+sudo apt-get install openvpn
+{% endhighlight %}
+
+Генерируем сертификаты и ключи (которые надо держать в секрете). Нам понадобятся:
+
+<ul>
+  <li>Сертификаты для сервера и для каждого клиента, а также приватные ключи для них.</li>
+  <li>CA-сертификат <code>ca.crt</code> и ключ <code>ca.key</code> для подписи сертификатов сервера и клиентов.</li>
+  <li>Ключ Diffie Hellman. Нужен для SSL/TLS соединения.</li>
+</ul>
+
+В составе OpenVPN есть утилита для генерации ключей, которая лежит в <code>/usr/share/doc/openvpn/examples/easy-rsa/2.0/.</code> В файле <code>vars</code> можно поменять настройки под себя, можно оставить дефолтные.
+
+Инициализация (обращаем внимание на то, что после первой точки есть пробел):
+
+{% highlight bash %}
+. ./vars
+./clean-all
+{% endhighlight %}
+
+Генерируем <code>ca.crt</code> и <code>ca.key</code>, сертификаты и ключи для сервера/клиентов и ключ Diffie Hellman. На вопросы можно не отвечать и просто давить <code>Enter.</code>
+
+{% highlight bash %}
+./build-ca 
+./build-key-server server_name
+./build-key client_name1
+./build-key client_name2
+./build-dh
+{% endhighlight %}
+
+Копируем нужные на сервере файлы в <code>/etc/openvpn/.</code>
+
+{% highlight bash %}
+cp ./keys/ca.crt /etc/openvpn/
+cp ./keys/server_name.crt /etc/openvpn/
+cp ./keys/server_name.key /etc/openvpn/
+cp ./keys/dh1024.pem /etc/openvpn/
+{% endhighlight %}
+
+Ключ <code>ca.key</code> не обязательно держать там же, но он нужен для подписи сертификатов, поэтому его надо сохранить.
+
+Разбираемся с конфигом. В <code>/usr/share/doc/openvpn/examples/sample-config-files/</code> есть примерный файл конфигурации сервера <code>server.conf,</code> в нем подробно прокомментированы все опции. Мой конфиг выглядит примерно так:
+
+{% highlight bash %}
+port 1194                       # дефолтный порт
+proto upd                       # используемый протокол
+dev tun                         # "dev tun" -- для IP-туннеля
+ca ca.crt                       # CA-сертификат
+cert server_name.crt            # сертификат сервера
+key server_name.key             # приватный ключ сервера
+dh dh1024.pem                   # ключ Diffie Hellman
+server 10.8.0.0 255.255.255.0   # используемая подсеть
+ifconfig-pool-persist ipp.txt   # файл с адресами клиентов
+push "redirect-gateway"         # перенаправлять весь трафик через VPN
+keepalive 10 120                # пинговать каждые 10 сек, 
+                                # если нет ответа 120 сек -- отваливаться
+comp-lzo                        # использовать сжатие
+user nobody                     # на всякий случай даем как можно меньше прав
+group nogroup
+persist-key                     # не перечитывать ключи
+persist-tun                     # не переоткрывать tun-device
+log-append /var/log/openvpn.log # лог-файл
+verb 4                          # уровень детализации лога
+{% endhighlight %}
+
+Прописываем правила <code>iptables</code>. Нужно разрешить клиентам из подсети <code>10.8.0.0/24</code> доступ в интернет, разрешить принимать пакеты из интернета и пропустить трафик клиентов через NAT.
+
+{% highlight bash %}
+iptables -A FORWARD -s 10.8.0.0/24 -j ACCEPT
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+{% endhighlight %}
+
+Чтобы правила не сбросились после перезагрузки, добавляем их в <code>/etc/rc.local.</code>
+
+Включаем форвардинг в ядре: в <code>/etc/sysctl.conf</code> добавляем (или раскомментируем) строку 
+
+{% highlight bash %}
+net.ipv4.ip_forward=1
+{% endhighlight %}
+
+Чтобы форвардинг заработал без перезагрузки, делаем
+
+{% highlight bash %}
+echo 1 > /proc/sys/net/ipv4/conf/all/forwarding
+{% endhighlight %}
+
+Если клиент уже находится за NAT-ом, проброс трафика не заработает, а в логах можно будет найти строки вроде <code>"MULTI: bad source address from client [a.b.c.d], packet dropped"</code> -- так как у OpenVPN нет правил для обработки пакетов из подсети <code>a.b.c.0/24</code>, они дропаются. Поэтому прописываем нужные правила: в <code>/etc/openvpn/server.conf</code> добавляем строки
+
+{% highlight bash %}
+client-config-dir ccd           # директория с настройками для клиентов
+route a.b.c.0 255.255.255.0     # обрабатывать пакеты из подсети a.b.c.0/24
+{% endhighlight %}
+
+а в <code>/etc/openvpn/ccd/</code> создаем файл <code>client_name1.conf</code> и в нем пишем
+
+{% highlight bash %}
+iroute a.b.c.0 255.255.255.0    # разрешаем доступ к VPN из подсети a.b.c.0/24
+{% endhighlight %}
+
+Настройка серверной части закончена, перезапускаем OpenVPN.
+
+{% highlight bash %}
+sudo service openvpn restart
+{% endhighlight %}
+
+<h3>Настройка клиента -- Ubuntu</h3>
+
+Во-первых, надо установить OpenVPN на клиенте.
+
+{% highlight bash %}
+sudo apt-get install openvpn
+{% endhighlight %}
+
+Во-вторых, с сервера надо скопировать CA-сертификат <code>ca.crt,</code> сертификат <code>client_name1.crt</code> и ключ <code>client_name1.key.</code>
+
+Есть два способа настройки клиентской части OpenVPN. Первый -- это конфиг в <code>/etc/openvpn/</code>. В <code>/usr/share/doc/openvpn/examples/sample-config-files/</code> есть примерный <code>client.conf</code> с комментариями. Мой конфиг примерно такой:
+
+{% highlight bash %}
+client                          # указываем, что это клиент
+dev tun                         # на сервере и клиенте должно совпадать
+proto udp                       # на сервере и клиенте должно совпадать
+remote a.b.c.d 1194             # адрес и порт сервера
+resolv-retry infinite           # пытаться достучаться до сервера бесконечно
+nobind                          # не использовать какой-то особый порт
+user nobody                     # на всякий случай даем как можно меньше прав
+group nogroup                   # на всякий случай даем как можно меньше прав
+persist-key                     # не перечитывать ключи
+persist-tun                     # не переоткрывать tun-device
+mute-replay-warnings            # подавлять предупреждения о повторных пакетах
+ca ca.crt                       # CA-сертификат
+cert client_name1.crt           # сертификат клиента
+key client_name1.key            # приватный ключ клиента
+comp-lzo                        # на сервере и клиенте должно совпадать
+log-append /var/log/openvpn.log # лог-файл
+verb 4                          # уровень детализации лога
+{% endhighlight %}
+
+Второй способ -- настройка через GUI. Ставим плагин для network manager:
+
+{% highlight bash %}
+sudo apt-get install network-manager-openvpn
+{% endhighlight %}
+
+И добавляем VPN в Network Connections (VPN Connections -> Configure VPN -> Add). Там все просто и понятно: нужно указать адрес сервера, и указать путь к <code>ca.crt</code> и клиентскому сертификату/ключу. Остальные настройки (протокол, порт, использовать ли сжатие, etc) тоже можно поменять.
+
+Замечание насчет DNS: домены могут не резолвиться при перенаправлении трафика через VPN, если используются DNS-сервера провайдера, доступные только из его локальной сети. Поэтому лучше использовать какие-нибудь публичные DNS-сервера, например, Google Public DNS (<code>8.8.8.8</code> и <code>8.8.4.4</code>). 
+
+<h3>Настройка клиента -- Android</h3>
+
+Android не поддерживает OpenVPN «из коробки». Поэтому находим в Google Play и ставим какой-нибудь OpenVPN клиент, права root-а для этого не обязательны. Вновь понадобится <code>ca.crt</code> и клиентский сертфикат/ключ.
