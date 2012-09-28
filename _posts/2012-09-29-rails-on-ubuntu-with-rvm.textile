@@ -29,7 +29,7 @@ rvm pkg install zlib
 Во-вторых, нужен некастрированный openssl (товарищи из Canonical любезно выпилили из своей либы поддержку SSLv2, мол это ненадежно, не модно и вообще).
 
 {% highlight bash %}
-rvm pkg isntall openssl
+rvm pkg install openssl
 {% endhighlight %}
 
 В-третьих, нужен readline, если вы собираетесь использовать рельсовую консоль.
@@ -43,7 +43,7 @@ rvm pkg install readline
 
 {% highlight bash %}
 rvm install 1.9.3 --with-openssl-dir=$rvm_path/usr
-gem isntall rails
+gem install rails
 {% endhighlight %}
 
 Тех, кто не последовал совету, последовательно ожидают следующие кары:
