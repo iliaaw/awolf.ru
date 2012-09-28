@@ -17,33 +17,33 @@ RVM и команда Canonical заботливо подтоговили пар
 Перед началом процедур RVM нужно активировать.
 
 {% highlight bash %}
-source ~/.rvm/scripts/rvm
+$ source ~/.rvm/scripts/rvm
 {% endhighlight %}
 
 Во-первых, нужен zlib (для bundler, который используется рельсами). 
 
 {% highlight bash %}
-rvm pkg install zlib
+$ rvm pkg install zlib
 {% endhighlight %}
 
 Во-вторых, нужен некастрированный openssl (товарищи из Canonical любезно выпилили из своей либы поддержку SSLv2, мол это ненадежно, не модно и вообще).
 
 {% highlight bash %}
-rvm pkg install openssl
+$ rvm pkg install openssl
 {% endhighlight %}
 
 В-третьих, нужен readline, если вы собираетесь использовать рельсовую консоль.
 
 {% highlight bash %}
-sudo apt-get install libreadline-dev
-rvm pkg install readline
+$ sudo apt-get install libreadline-dev
+$ rvm pkg install readline
 {% endhighlight %}
 
 Все, теперь можно ставить руби и рельсы.
 
 {% highlight bash %}
-rvm install 1.9.3 --with-openssl-dir=$rvm_path/usr
-gem install rails
+$ rvm install 1.9.3 --with-openssl-dir=$rvm_path/usr
+$ gem install rails
 {% endhighlight %}
 
 Тех, кто не последовал совету, последовательно ожидают следующие кары:

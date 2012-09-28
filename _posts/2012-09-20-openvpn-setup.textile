@@ -87,9 +87,9 @@ verb 4                          # уровень детализации лога
 Прописываем правила <code>iptables</code>. Нужно разрешить клиентам из подсети <code>10.8.0.0/24</code> доступ в интернет, разрешить принимать пакеты из интернета и пропустить трафик клиентов через NAT.
 
 {% highlight bash %}
-$ iptables -A FORWARD -s 10.8.0.0/24 -j ACCEPT
-$ iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
-$ iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+iptables -A FORWARD -s 10.8.0.0/24 -j ACCEPT
+iptables -A FORWARD -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 {% endhighlight %}
 
 Чтобы правила не сбросились после перезагрузки, добавляем их в <code>/etc/rc.local.</code>
