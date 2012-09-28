@@ -1,0 +1,57 @@
+---
+layout: post
+title: Обходим грабли при установке Ruby on Rails в RVM под Ubuntu
+tags:
+- rails
+- ubuntu
+- ruby
+date: 2012-09-29 01:04:00
+---
+RVM и команда Canonical заботливо подтоговили пару грабелек, ожидающих каждого, кто ставит рельсы в RVM под Ubuntu. Чтобы собирать руби не четыре раза, а только один, перед установкой нужно провести кое-какие подготовительные действия. Все описанное нужно выполнять сразу после установки RVM.
+
+<cut />
+
+Поскольку в мире руби все меняется настолько быстро, что за то время, пока напишешь строку кода, в ней уже что-нибудь неправильно из-за изменений в самом языке или каком-нибудь геме, указываю версии: руби <code>1.9.3-p194,</code> RVM <code>1.15.8 (stable),</code> рельсы <code>3.2.8.</code>
+
+Перед началом процедур RVM нужно активировать.
+
+{% highlight bash %}
+source ~/.rvm/scripts/rvm
+{% endhighlight %}
+
+Во-первых, нужен zlib (для bundler, который используется рельсами). 
+
+{% highlight bash %}
+rvm pkg install zlib
+{% endhighlight %}
+
+Во-вторых, нужен некастрированный openssl (товарищи из Canonical любезно выпилили из своей либы поддержку SSLv2, мол это ненадежно, не модно и вообще).
+
+{% highlight bash %}
+rvm pkg isntall openssl
+{% endhighlight %}
+
+В-третьих, нужен readline, если вы собираетесь использовать рельсовую консоль.
+
+{% highlight bash %}
+sudo apt-get install libreadline-dev
+rvm pkg install readline
+{% endhighlight %}
+
+Все, теперь можно ставить руби и рельсы.
+
+{% highlight bash %}
+rvm install 1.9.3 --with-openssl-dir=$rvm_path/usr
+gem isntall rails
+{% endhighlight %}
+
+Тех, кто не последовал совету, последовательно ожидают следующие кары:
+
+{% highlight html %}
+ERROR:  Loading command: install (LoadError)
+    cannot load such file -- zlib
+...
+undefined symbol: SSLv2_method
+...
+in `require': cannot load such file -- readline (LoadError)
+{% endhighlight %}
