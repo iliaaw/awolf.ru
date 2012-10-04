@@ -15,20 +15,16 @@
 
     <body>
         <div id="content-wrapper">
-            <h1 id="header"><a href="/">Yet Another Blog</a></h1>
+            <div id="header">
+                <h1 id="title"><a href="/">Yet Another Blog</a></h1>
 
-            <div class="line"></div>
-
-            <ul id="nav">
-                <li><a href="/">Главная</a></li>
-                <li><a href="/about/">О сайте</a></li>
-                <li><a href="/contacts/">Контакты</a></li>
-                <li><a class="rss" href="/atom.xml">Atom-лента</a></li>
-                <li><a class="rss" href="/rss.xml">RSS-лента</a></li>
-                <li class="helper"></li>
-            </ul>
-
-            <div class="line"></div>
+                <ul id="nav">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/about/">О сайте</a></li>
+                    <li><a href="/contacts/">Контакты</a></li>
+                    <li><a class="rss" href="/rss.xml">RSS</a></li>
+                </ul>
+            </div>
             
             <div id="content">
                 {{ content }}
