@@ -42,29 +42,55 @@ code {
 }
 
 #header {
-    padding: 50px 0px;
-    font-size: 32px;
-    font-family: "EB Garamond", Georgia, serif;
+    padding: 50px 0px 0px 0px;
+    position: relative;
+    line-height: 32px;
 }
 
-#header a {
+#title {
+    font-size: 32px;
+    font-family: "EB Garamond", Georgia, serif;
+    display: inline;
+}
+
+#title a {
     color: #202020;
     text-decoration: none;
 }
 
 #nav {
-    height: 50px;
-    text-align: justify;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
 }
 
 #nav li {
-    display: inline-block;
-    line-height: 50px;
-    text-align: center;
+    display: inline;
 }
 
-#nav li.helper {
-    width: 100%;
+#nav li:after {
+    content: "/";
+}
+
+#nav li:last-child:after {
+    content: "";
+}
+
+#nav li a {
+    padding: 0px 5px;
+}
+
+#nav li:first-child a {
+    padding-left: 0px;
+}
+
+#nav li:last-child a {
+    padding-right: 0px;
+}
+
+#about {
+    line-height: 25px;
+    padding: 50px 0px 0px;
 }
 
 #content {
