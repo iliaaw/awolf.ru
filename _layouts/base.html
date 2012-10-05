@@ -4,6 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="description" content="Уютный бложик Ильи Хохрякова. Разработка, администрирование." />
         <link href='http://fonts.googleapis.com/css?family=EB+Garamond&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/static/style/reset.css" />
         <link rel="stylesheet" href="/static/style/style.css" />
         <link rel="stylesheet" href="/static/style/pygments.css" />
@@ -20,11 +21,17 @@
 
                 <ul id="nav">
                     <li><a href="/">Главная</a></li>
-                    <li><a href="/about/">О сайте</a></li>
                     <li><a href="/contacts/">Контакты</a></li>
                     <li><a class="rss" href="/rss.xml">RSS</a></li>
+                    <li><a class="rss" href="/atom.xml">Atom</a></li>
                 </ul>
             </div>
+
+            {% if page.url == '/index.html' or page.url contains '/page' %}
+                <div id="about">
+                    <p>Добро пожаловать в уютный бложик. Здесь я собираю различные руководства, гайдлайны и вообще все то, что хочется сохранить и не хочется каждый раз придумывать заново.</p>
+                </div>
+            {% endif %}
             
             <div id="content">
                 {{ content }}
