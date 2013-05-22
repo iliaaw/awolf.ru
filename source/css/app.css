@@ -1,0 +1,152 @@
+html {
+    height: 100%;
+    background: url(/images/bg.png);
+}
+
+body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    font-size: 16px;
+    color: #202020;
+    height: 100%;
+}
+
+body.index {
+    background: url(/images/kiritsugu.png) left bottom no-repeat;
+}
+
+a {
+    text-decoration: none;
+    color: #1e74fd;
+    border-bottom: 1px solid #619efe;
+}
+
+a:hover {
+    color: #ff035b;
+    border-bottom: 1px solid #ff5892;
+}
+
+.horizontal {
+    position: absolute;
+    height: 100%;
+    width: 500px;
+    left: 50%;
+    margin-left: -100px;
+}
+
+.vertical {
+    position: absolute;
+    height: 320px;
+    width: 100%;
+    top: 50%;
+    margin-top: -160px;
+    line-height: 40px;
+}
+
+.name {
+    font-size: 18px;
+}
+
+.profile {
+    height: 40px;
+}
+
+.content-wrapper {
+    width: 720px;
+    min-height: 100%;
+    margin: 0px auto;
+    padding: 0px 30px;
+    overflow: hidden;
+}
+
+.header {
+    padding: 50px 0px 0px 0px;
+    position: relative;
+    line-height: 32px;
+}
+
+.title {
+    font-size: 32px;
+    display: inline;
+}
+
+.title a {
+    color: #202020;
+    border-bottom: none;
+}
+
+.nav {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.nav li {
+    display: inline;
+}
+
+.nav li:after {
+    content: "/";
+}
+
+.nav li:last-child:after {
+    content: "";
+}
+
+.nav li a {
+    margin: 0px 5px;
+}
+
+.nav li:first-child a {
+    margin-left: 0px;
+}
+
+.nav li:last-child a {
+    margin-right: 0px;
+}
+
+.about {
+    line-height: 25px;
+    padding: 50px 0px 0px;
+}
+
+.content {
+    line-height: 25px;
+    padding: 50px 0px 130px;
+}
+
+.post {
+    padding-top: 50px;
+}
+
+.post:first-child {
+    padding-top: 0px;
+}
+
+.post p {
+    padding: 12px 0px;
+}
+
+.post p:first-child {
+    padding-top: 0px;
+}
+
+.post p:last-child {
+    padding-bottom: 0px;
+}
+
+.footer-wrapper {
+    width: 720px;
+    margin: -80px auto 0px;
+    font-size: 16px;
+}
+
+.footer {
+    padding-top: 20px;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background: #a0a0a0;
+    box-shadow: #fff 0px 1px;
+}
