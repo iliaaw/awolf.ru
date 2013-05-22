@@ -1,0 +1,18 @@
+= wrap_layout :layout do
+  .content-wrapper
+    .header
+      %h1.title
+        %a{ :href => '/blog' } awolf's blog
+      %ul.nav
+        %li 
+          %a{ :href => '/' } home
+        %li 
+          %a{ :href => '/blog' } blog
+        %li 
+          %a{ :href => '/blog/feed.xml' } rss feed
+    .content
+      = yield
+  .footer-wrapper
+    .line
+      .footer
+        awolf, 2013

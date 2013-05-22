@@ -1,5 +1,25 @@
 require 'haml'
 
+activate :blog do |blog|
+  blog.prefix = 'blog'
+  blog.layout = 'post'
+
+  blog.permalink = ':title.html'
+  blog.taglink = 'tags/:tag'
+  blog.year_link = ':year'
+  blog.month_link = ':year/:month'
+  blog.day_link = ':year/:month/:day'
+  
+  blog.tag_template = 'blog/tag.html'
+
+  blog.paginate = true
+  blog.per_page = 5
+  blog.page_link = 'page:num'
+end
+
+page '/blog/index.html', :layout => 'blog'
+page '/feed.xml', :layout => false
+
 set :css_dir, 'css'
 set :js_dir, 'js'
 set :images_dir, 'images'
