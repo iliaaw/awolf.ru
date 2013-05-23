@@ -1,4 +1,9 @@
 = wrap_layout :blog do
   .post
-    %h2 #{ data.page.title }
-  = yield
+    %h2 #{ data.page.verbose }
+    .timestamp
+      published at #{ data.page.date.strftime('%b %e') }
+    = yield
+    .tags
+      - data.page.tags.split(', ').each do |tag|
+        %a{ :href => "/blog/tags/#{tag}.html", :class => 'tag' } #{tag}

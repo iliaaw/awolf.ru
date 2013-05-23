@@ -1,6 +1,6 @@
 html {
     height: 100%;
-    background: url(/images/bg.png);
+    background: fixed url(/images/bg.png);
 }
 
 body {
@@ -74,6 +74,14 @@ a:hover {
     border-bottom: none;
 }
 
+.title a:hover {
+    color: #ff035b;
+}
+
+.subtitle {
+    font-size: 22px;
+}
+
 .nav {
     position: absolute;
     bottom: 0px;
@@ -104,11 +112,6 @@ a:hover {
     margin-right: 0px;
 }
 
-.about {
-    line-height: 25px;
-    padding: 50px 0px 0px;
-}
-
 .content {
     line-height: 25px;
     padding: 50px 0px 130px;
@@ -134,10 +137,58 @@ a:hover {
     padding-bottom: 0px;
 }
 
+.post h2 {
+    padding-bottom: 10px;
+    color: #202020;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.post h3 {
+    padding: 20px 0px 12px;
+    font-size: 22px;
+}
+
+.post .timestamp {
+    font-style: italic;
+    color: #4f4f4f;
+    padding-bottom: 12px;
+}
+
+.post img {
+    max-width: 720px;
+    display: block;
+    margin: 0px auto;
+}
+
+.post .highlight {
+    margin: 2px -30px;
+    background: #d8d8d8;
+}
+
+.post ul {
+    list-style: disc;
+    padding: 12px 0px;
+    line-height: 25px;
+}
+
+.tags {
+    margin: 12px 0px 0px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAaFJREFUeNpi/P//PwMh4Fe5zx1IrcYiNYeJkGaf8r3u//79X50dY8JroC7Ky870H4xBbKB4Cgs+zV4lu8E258ab8269+JHhyY2XDOs6XMByQRV7GP79/c+A0wD3wl1gzXmJ5rybL7wHiyF7FsT+CzSAEVsYuOTuAGvOTwZqPv8eLv7l5RuG7x8+gdmcAnwMr56++4zhAsfMbRDNKRa8a0+9RZFjExICYxj4+/ANqhfsUjaDNRekW/GuPvEab+A+Pn/rMygW4F6wStgI1lyYYcW7ioDmpxdugzUfW+BfBDbAPHo9RHO2Ne/yoy/xan5x4Q5Y88mlgUUgPqNR6GqI5lwb3iWHXuDV/PoiRPPZVSFFMDGWP3/+rS7Ks+Wdt/cpXs1vL90Fa764LqwIWZxR22d5H5BOEdRT4sWl+f2le2DNVzZHFKHLgcNA03Mp2BA+XWUMQz5dhth8fXt0ETbD4bGg5roYbAivLsIlny9DbL61O7YIl+tQUqKy0yKwITy6irxfLt8Ha767L64IX9hgJGVF+wVgQ0Ca7x9MKCKUWwECDABXTL4ZpMzUsQAAAABJRU5ErkJggg==") no-repeat 0px 5px;
+    padding-left: 20px;
+}
+
+.tag {
+    margin-left: 3px;
+}
+
+.paginator {
+    margin-top: 50px;
+}
+
 .footer-wrapper {
     width: 720px;
     margin: -80px auto 0px;
-    font-size: 16px;
 }
 
 .footer {

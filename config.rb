@@ -5,19 +5,20 @@ activate :blog do |blog|
   blog.layout = 'post'
 
   blog.permalink = ':title.html'
-  blog.taglink = 'tags/:tag'
-  blog.year_link = ':year'
-  blog.month_link = ':year/:month'
-  blog.day_link = ':year/:month/:day'
-  
+  blog.taglink = 'tags/:tag.html'
+  blog.year_link = ':year.html'
+  blog.month_link = ':year/:month.html'
+  blog.day_link = ':year/:month/:day.html'
+
   blog.tag_template = 'blog/tag.html'
 
   blog.paginate = true
-  blog.per_page = 5
+  blog.per_page = 2
   blog.page_link = 'page:num'
 end
 
 page '/blog/index.html', :layout => 'blog'
+page '/blog/tags/*', :layout => 'blog'
 page '/feed.xml', :layout => false
 
 set :css_dir, 'css'
