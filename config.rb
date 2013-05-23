@@ -17,9 +17,7 @@ activate :blog do |blog|
   blog.page_link = 'page:num'
 end
 
-page '/blog/index.html', :layout => 'blog'
-page '/blog/tags/*', :layout => 'blog'
-page '/feed.xml', :layout => false
+page '/blog/feed.xml', :layout => false
 
 set :css_dir, 'css'
 set :js_dir, 'js'

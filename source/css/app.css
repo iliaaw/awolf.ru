@@ -25,6 +25,13 @@ a:hover {
     border-bottom: 1px solid #ff5892;
 }
 
+code {
+    font-family: Consolas, "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", monospace;
+    font-size: 16px;
+    line-height: 16px;
+    background: #cacaca;
+}
+
 .horizontal {
     position: absolute;
     height: 100%;
@@ -200,4 +207,16 @@ a:hover {
     height: 1px;
     background: #a0a0a0;
     box-shadow: #fff 0px 1px;
+}
+
+.error {
+    width: 200px;
+    margin: 0px auto;
+    text-align: center;
+    font-size: 18px;
+}
+
+.error-code {
+    font-size: 48px;
+    padding: 100px 0px 40px;
 }
