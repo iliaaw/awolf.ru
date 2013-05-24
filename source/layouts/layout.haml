@@ -6,7 +6,7 @@
     %title #{ yield_content(:title) || data.page.title }
     
     = stylesheet_link_tag 'http://fonts.googleapis.com/css?family=PT+Serif:700&subset=latin,cyrillic'
-    = stylesheet_link_tag 'reset', 'app', 'pygments'
+    = stylesheet_link_tag 'app'
     = javascript_include_tag 'all'
   %body{ :class => "#{ page_classes }" }
     = yield
