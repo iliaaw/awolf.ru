@@ -1,4 +1,16 @@
 require 'haml'
+require 'sass'
+
+set :css_dir, 'css'
+set :js_dir, 'js'
+set :images_dir, 'images'
+set :markdown_engine, :redcarpet
+set :markdown, :fenced_code_blocks => true, 
+               :smartypants => true, 
+               :strikethrough => true
+set :haml, :ugly => true
+
+page '/blog/feed.xml', :layout => false
 
 activate :blog do |blog|
   blog.prefix = 'blog'
@@ -13,15 +25,11 @@ activate :blog do |blog|
   blog.tag_template = 'blog/tag.html'
 
   blog.paginate = true
-  blog.per_page = 2
+  blog.per_page = 5
   blog.page_link = 'page:num'
 end
 
-page '/blog/feed.xml', :layout => false
-
-set :css_dir, 'css'
-set :js_dir, 'js'
-set :images_dir, 'images'
+activate :syntax
 
 configure :build do
   activate :minify_css

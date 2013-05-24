@@ -2,7 +2,7 @@
   .post
     %h2 #{ data.page.verbose }
     .timestamp
-      published at #{ data.page.date.strftime('%b %e') }
+      published at #{ data.page.date.strftime('%d %B %Y') }
     = yield
     .tags
       - data.page.tags.split(', ').each do |tag|

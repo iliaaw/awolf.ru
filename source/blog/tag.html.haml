@@ -4,7 +4,7 @@ pageable: true
 ---
 
 %h1.subtitle
-  Articles tagged «#{tagname}»
+  #{ page_articles.count } articles tagged «#{tagname}»
 - page_articles.each_with_index do |article, i|
   .post
     %h2 
@@ -15,6 +15,8 @@ pageable: true
     .tags
       - article.tags.each do |tag|
         %a{ :href => "/blog/tags/#{tag}.html", :class => 'tag' } #{tag}
+  - unless i == page_articles.count - 1
+    .line{ :style => 'margin-top: 50px;' }
 - if paginate
   .paginator
     - if prev_page

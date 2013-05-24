@@ -1,4 +1,5 @@
 ---
+title: awolf's blog
 layout: blog
 pageable: true
 ---
@@ -8,11 +9,13 @@ pageable: true
     %h2 
       = link_to article.data.verbose, article
     .timestamp
-      published at #{ article.date.strftime('%b %e') }
+      published at #{ article.date.strftime('%d %B %Y') }
     = article.body
     .tags
       - article.tags.each do |tag|
         %a{ :href => "/blog/tags/#{tag}.html", :class => 'tag' } #{tag}
+  - unless i == page_articles.count - 1
+    .line{ :style => 'margin-top: 50px;' }
 - if paginate
   .paginator
     - if prev_page
