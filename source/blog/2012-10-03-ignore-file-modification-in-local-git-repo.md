@@ -1,5 +1,5 @@
 ---
-title: ignore-file-modifications-in-local-git-repo
+title: ignore-file-modification-in-local-git-repo
 verbose: Игнорирование изменений файла в локальном git-репозитории
 date: 2012-10-03T12:59:00+04:00
 tags: git

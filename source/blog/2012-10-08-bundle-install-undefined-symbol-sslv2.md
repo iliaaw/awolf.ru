@@ -1,5 +1,5 @@
 ---
-title: bundle-install-undefined-sysmbol-sslv2
+title: bundle-install-undefined-symbol-sslv2
 verbose: Undefined symbol SSLv2_method while running bundle install
 tags: ruby, ubuntu, linux
 date: 2012-10-08T19:20:00+04:00
