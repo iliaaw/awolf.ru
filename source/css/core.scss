@@ -7,7 +7,8 @@ $block-v-margin: 50px;
 
 $primary-text-color: #202020;
 $lite-text-color: #4f4f4f;
-$code-bg-color: #dcdcdf;
+$code-bg-color: #d3d3d7;
+$quotes-bg-color: #dcdcdf;
 $primary-link-color: #2679fd;
 $hover-link-color: #f20356;
 
@@ -235,9 +236,10 @@ code {
 }
 
 .post blockquote {
+    font-family: $serif-font-family;
     padding: $paragraph-v-margin $code-h-margin;
     padding-left: ($code-h-margin - $blockquote-border-width);
-    background: $code-bg-color;
+    background: $quotes-bg-color;
     margin: 2px (-$code-h-margin);
     font-style: italic;
     border-left: $blockquote-border;
@@ -285,4 +287,12 @@ code {
     padding: 100px 0px 40px;
     font-family: $serif-font-family;
     font-weight: bold;
+}
+
+.timeago:before {
+    content: '(';
+}
+
+.timeago:after {
+    content: ')';
 }

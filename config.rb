@@ -9,6 +9,7 @@ set :markdown, :fenced_code_blocks => true,
                :smartypants => true, 
                :strikethrough => true
 set :haml, :ugly => true
+Time.zone = 'Moscow'
 
 page '/blog/feed.xml', :layout => false
 
