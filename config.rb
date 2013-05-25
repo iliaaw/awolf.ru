@@ -19,9 +19,6 @@ activate :blog do |blog|
 
   blog.permalink = ':title.html'
   blog.taglink = 'tags/:tag.html'
-  blog.year_link = ':year.html'
-  blog.month_link = ':year/:month.html'
-  blog.day_link = ':year/:month/:day.html'
 
   blog.tag_template = 'blog/tag.html'
 

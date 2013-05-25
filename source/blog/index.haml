@@ -14,7 +14,7 @@ pageable: true
     = article.body
     .tags
       - article.tags.each do |tag|
-        %a{ :href => "/blog/tags/#{tag}.html", :class => 'tag' } #{tag}
+        %a{ :href => "/blog/tags/#{tag}", :class => 'tag' } #{tag}
 - if paginate
   .paginator
     - if prev_page
