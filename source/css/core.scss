@@ -12,9 +12,6 @@ $quotes-bg-color: #dcdcdf;
 $primary-link-color: #2679fd;
 $hover-link-color: #f20356;
 
-$link-primary-underline: 1px solid #8bb7fd;
-$link-hover-underline: 1px solid #f285ab;
-
 $img-primary-shadow: #808080 0px 0px 8px 1px;
 $img-hover-shadow: #f20356 0px 0px 8px 1px;
 
@@ -53,14 +50,11 @@ body.index {
 }
 
 a {
-    text-decoration: none;
     color: $primary-link-color;
-    border-bottom: $link-primary-underline;
 }
 
 a:hover {
     color: $hover-link-color;
-    border-bottom: $link-hover-underline;
 }
 
 code, pre {
@@ -103,9 +97,6 @@ code {
     margin: 0px auto;
     padding: 0px $code-h-margin;
     overflow: hidden;
-
-    /*background: #f5f5f5;
-    box-shadow: 0px 0px 4px 1px #cacaca;*/
 }
 
 .header {
@@ -122,8 +113,8 @@ code {
 }
 
 .title a {
+    text-decoration: none;
     color: $primary-text-color;
-    border-bottom: none;
 }
 
 .title a:hover {
@@ -194,6 +185,7 @@ code {
     color: $primary-text-color;
     font-size: $title-font-size;
     font-family: $serif-font-family;
+    line-height: 1.1em;
     font-weight: bold;
 }
 
