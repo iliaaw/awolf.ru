@@ -7,7 +7,7 @@ pageable: true
 - page_articles.each_with_index do |article, i|
   .post
     %h2 
-      = link_to article.data.verbose, article
+      %a{ :href => "/blog/#{article.data.title}" } #{article.data.verbose}
     .timestamp
       published at #{ article.date.strftime('%d %B %Y') }
       %span.timeago{ :title => article.date }
