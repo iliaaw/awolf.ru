@@ -222,6 +222,11 @@ code {
     word-wrap: break-word;
 }
 
+.highlight code {
+    background: none;
+    vertical-align: bottom;
+}
+
 .post ul {
     list-style: disc;
     padding: $paragraph-v-margin 0px;

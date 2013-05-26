@@ -1,5 +1,16 @@
 require 'haml'
 require 'sass'
+require 'rouge'
+
+class Rouge::Formatters::HTML < Rouge::Formatter
+  def stream_untableized(tokens, &b)
+    yield "<pre class=#{@css_class.inspect}><code>"
+    tokens.each do |tok, val|
+      span(tok, val, &b)
+    end
+    yield '</code></pre>'
+  end
+end
 
 set :css_dir, 'css'
 set :js_dir, 'js'
