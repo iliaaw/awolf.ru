@@ -11,7 +11,7 @@ pageable: true
     %h2 
       %a{ :href => "/blog/#{article.data.title}" } #{article.data.verbose}
     .timestamp
-      published at #{ article.date.strftime('%b %e') }
+      #{ article.date.strftime('%b %e') }
       %span.timeago{ :title => article.date }
     = article.body
     .tags

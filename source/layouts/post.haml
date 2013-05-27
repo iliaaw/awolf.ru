@@ -2,7 +2,7 @@
   .post
     %h2 #{ data.page.verbose }
     .timestamp
-      published at #{ data.page.date.strftime('%d %B %Y') }
+      #{ data.page.date.strftime('%d %B %Y') }
       %span.timeago{ :title => data.page.date } 
     = yield
     .tags
