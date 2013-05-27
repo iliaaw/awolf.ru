@@ -5,7 +5,7 @@ tags: ruby, ubuntu, linux
 date: 2012-10-08T19:20:00+04:00
 ---
 
-If you see a message that contains something like `"undefined symbol: SSLv2_method"` after running `bundle install` inside Rails project's dir and if you use RVM on Ubuntu, here is a solution. Note that it's better to take care of this problem before installing Ruby. Otherwise, you have to reinstall Ruby later.
+If you get an error message `undefined symbol: SSLv2_method` after running `bundle install` inside Rails project's dir and if you use RVM on Ubuntu, here is a solution to this problem. Note that it's better to take care of this problem before installing Ruby. Otherwise, you have to reinstall Ruby later.
 
 Everything in the Ruby world changes quite quickly, so it's better to know the exact versions of software I used while testing this solution.
 
