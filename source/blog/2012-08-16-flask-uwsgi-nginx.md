@@ -25,7 +25,7 @@ $ sudo apt-get install uwsgi nginx uwsgi-plugin-python
 
 ### nginx
 
-Подробную настройку nginx оставим гуру этого дела, я ограничусь лишь основным. В `/etc/nginx/sites-available/` создаем новый конфиг, `flask.conf`, например, в нем пишем
+Подробную настройку nginx оставим гуру этого дела, я ограничусь лишь основным. В `/etc/nginx/sites-available/` создаем новый конфиг, `flask.conf`, например, в нем пишем:
 
 ~~~nginx
 upstream flask_serv {
@@ -56,7 +56,7 @@ $ sudo ln -s /etc/nginx/sites-available/flask.conf
 
 ### uWSGI
 
-Теперь в `/etc/uwsgi/apps-available/` создаем конфиг для uWSGI `flask.xml` следующего содержания
+Теперь в `/etc/uwsgi/apps-available/` создаем конфиг для uWSGI `flask.xml` следующего содержания:
 
 ~~~xml
 <uwsgi>

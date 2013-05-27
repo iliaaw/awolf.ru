@@ -51,7 +51,7 @@ $ cp ./keys/dh1024.pem /etc/openvpn/
 
 Ключ `ca.key` используется только для подписи сертификатов --- поэтому его можно не держать в `/etc/openvpn/`, но обязательно нужно сохранить в надежном месте и никому не показывать.
 
-Разбираемся с конфигом. В `/usr/share/doc/openvpn/examples/sample-config-files/` есть примерный файл конфигурации сервера `server.conf,` в нем подробно прокомментированы все опции. Мой конфиг выглядит примерно так:
+Разбираемся с конфигом. В `/usr/share/doc/openvpn/examples/sample-config-files/` есть шаблон `server.conf`, в нем подробно прокомментированы все опции. Мой конфиг выглядит примерно так:
 
 ~~~text
 port 1194                       # дефолтный порт
@@ -124,9 +124,9 @@ $ sudo service openvpn restart
 $ sudo apt-get install openvpn
 ~~~
 
-Во-вторых, с сервера надо скопировать CA-сертификат `ca.crt,` сертификат `client_name1.crt` и ключ `client_name1.key`.
+Во-вторых, с сервера надо скопировать CA-сертификат `ca.crt`, сертификат `client_name1.crt` и ключ `client_name1.key`.
 
-Есть два способа настройки клиентской части OpenVPN. Первый --- с использованием конфига в `/etc/openvpn/`. В `/usr/share/doc/openvpn/examples/sample-config-files/` есть примерный `client.conf` с комментариями. Мой конфиг примерно такой:
+Есть два способа настройки клиентской части OpenVPN. Первый --- с использованием конфига в `/etc/openvpn/`. В `/usr/share/doc/openvpn/examples/sample-config-files/` есть шаблон `client.conf` с комментариями. Мой конфиг выглядит примерно так:
 
 ~~~text
 client                          # указываем, что это клиент
