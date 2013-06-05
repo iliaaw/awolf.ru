@@ -58,7 +58,7 @@ a:hover {
 }
 
 code, pre {
-   font-family: $mono-font-family; 
+    font-family: $mono-font-family; 
 }
 
 code {
@@ -224,6 +224,10 @@ code {
 
 .highlight code {
     background: none;
+    vertical-align: bottom;
+}
+
+.highlight span {
     vertical-align: bottom;
 }
 
