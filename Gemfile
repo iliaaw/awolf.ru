@@ -9,6 +9,4 @@ gem 'haml'
 gem 'sass'
 gem 'builder'
 gem 'redcarpet'
-
 gem 'json', '~> 1.7.7'
-gem 'rb-inotify', '~> 0.9'
