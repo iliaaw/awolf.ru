@@ -1,7 +1,0 @@
-User-Agent: *
-Disallow: /js/
-Disallow: /css/
-Disallow: /blog/tags/
-Disallow: /blog/feed.xml
-Disallow: *.html
-Host: awolf.ru
